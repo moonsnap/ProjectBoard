@@ -1,0 +1,9 @@
+| board | CREATE TABLE `board` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  `content` text NOT NULL,
+  `author` varchar(30) NOT NULL,
+  `created` datetime NOT NULL,
+  `hits` int(15) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 |
