@@ -16,7 +16,7 @@
             var flag = confirm("글쓰기를 취소하시겠습니까?");    
             
             if (flag==true){
-                location.href="/index.php";
+                location.href="./index.php";
             }
             else
                 return;
@@ -28,7 +28,7 @@
 <body>
     <div class="container">
         <h2>새로운 글 작성</h2>
-        <form action="/process_write.php" method="post" onsubmit="return confirm('등록하시겠습니까?');">
+        <form action="./process_write.php" method="post" onsubmit="return confirm('등록하시겠습니까?');">
             <div class="input-group col-xs-5 col-lg-2">    
                 <span class="input-group-addon">작성자</span>
                 <input id="author" type="text" class="form-control" name="author" placeholder="작성자">
@@ -54,4 +54,3 @@
     </div>
 </body>
 </html>
-

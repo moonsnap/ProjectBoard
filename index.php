@@ -24,7 +24,8 @@
     }
 # ---------------------- 데이터 처리 ------------------------- #
     $start_post = ($page-1) * $list_post;
-
+    $no = $max_post - $start_post;
+    
     $listing_data = mysqli_query($conn, "SELECT * FROM board ORDER BY id DESC LIMIT $start_post, $list_post");
 ?>
 
@@ -32,7 +33,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>문스냅의 게시판 삽질</title>
+        <title>문스냅의 지속가능한 개발 게시판</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -42,7 +43,7 @@
     
     <body>
         <div class="container">
-            <center><h2>마우스 올리면 표시되는 테이블</h2></center>
+            <center><h2>문스냅의 지속가능한 개발 게시판</h2></center>
 
             <table class="table table-hover table-bordered">
                 <thead>
@@ -58,13 +59,14 @@
                     <?php
                         while ($row = mysqli_fetch_array($listing_data)){
                             print "<tr>";
-                            print "<td>$row[id]</td>";
-                            print "<td><a href='/view.php?page=$page&id=$row[id]'>$row[title]</a></td>";
+                            print "<td>$no</td>";
+                            print "<td><a href='./view.php?page=$page&id=$row[id]'>$row[title]</a></td>";
                             print "<td>$row[author]</td>";
                             print "<td>$row[hits]</td>";
                             print "<td>$row[created]</td>";
                             print "</tr>";
-                        }
+                            $no = $no - 1;  
+                        }                        
                         mysqli_close($conn);
                     ?>
                 </tbody>
@@ -72,19 +74,19 @@
                         
             <div class="row">
                 <div class="col-xs-6 col-lg-6">
-                    <a class="btn btn-primary" href="/write.php">글쓰기</a>
+                    <a class="btn btn-primary" href="./write.php">글쓰기</a>
                 </div>
                 <div class="con-xs-6 col-lg-6">
-                    <a class="btn btn-primary pull-right" href="/index.php">목록</a>
+                    <a class="btn btn-primary pull-right" href="./index.php">목록</a>
                 </div>
             </div>
-            <a href="/index.php?page=<?=$start_page-1?>">이전</a>    
+            <a href="./index.php?page=<?=$start_page-1?>">이전</a>    
             <ul class="pagination">
                 <?php for ($p=$start_page; $p<=$end_page; $p++){ ?>
-                    <li><a href="/index.php?page=<?=$p?>"><?=$p?></a>
+                    <li><a href="./index.php?page=<?=$p?>"><?=$p?></a>
                 <?php } ?>
             </ul>
-            <a href="/index.php?page=<?=$end_page+1?>">다음</a>
+            <a href="./index.php?page=<?=$end_page+1?>">다음</a>
             
         </div>
 

@@ -29,7 +29,7 @@
 <body>
     <div class="container">
         <h2>글 수정하기</h2>
-        <form action="/process_modify.php?page=<?=$page?>&id=<?=$id?>" method="post" onsubmit="return confirm('등록하시겠습니까?');">
+        <form action="./process_modify.php?page=<?=$page?>&id=<?=$id?>" method="post" onsubmit="return confirm('등록하시겠습니까?');">
             <div class="input-group form-group col-xs-5 col-lg-2">    
                 <span class="input-group-addon">작성자</span>
                 <input id="disabledInput" type="text" class="form-control" name="author" placeholder="<?=$data['author']?>" disabled>
