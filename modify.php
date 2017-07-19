@@ -19,7 +19,7 @@
             var flag = confirm("글수정를 취소하시겠습니까?");    
             
             if (flag==true){
-                location.href="/view.php?page=<?=$page?>&id=<?=$id?>";
+                location.href="./view.php?page=<?=$page?>&id=<?=$id?>";
             }
             else
                 return;

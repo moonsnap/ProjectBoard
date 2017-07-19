@@ -7,6 +7,8 @@
     mysqli_query($conn, "UPDATE board SET hits = hits+1 WHERE id=$id");
     $result = mysqli_query($conn, "SELECT * FROM board WHERE id=$id");  
     $data = mysqli_fetch_array($result);
+    $num_query = mysqli_query($conn, "SELECT MAX(id), MIN(id) FROM board");
+    $maxmin_no = mysqli_fetch_row($num_query);    
 ?>
 
 <head>
@@ -54,10 +56,14 @@
                 </div>
                 <div class="col-xs-4 col-md-4 col-lg-4"></div>
                 <div class="col-xs-4 col-md-4 col-lg-4">
-                    <div class="btn-group <pull-right></pull-right>">
-                        <button type="button" class="btn btn-primary" onclick="location.href='./view.php?page=<?=$page?>&id=<?=$id-1?>'">이전글</button>
-                        <button type="button" class="btn btn-primary" onclick="location.href='./view.php?page=<?=$page?>&id=<?=$id+1?>'">다음글</button>
-                        <button type="button" class="btn btn-primary" onclick="location.href='./index.php'">목록</button>
+                    <div class="btn-group pull-right">
+                        <?php if($id>$maxmin_no[1]){ ?>
+                            <button type="button" class="btn btn-primary" onclick="location.href='./view.php?page=<?=$page?>&id=<?=$id-1?>'">이전글</button>
+                        <?php } ?>
+                        <?php if($id<$maxmin_no[0]){ ?>
+                            <button type="button" class="btn btn-primary" onclick="location.href='./view.php?page=<?=$page?>&id=<?=$id+1?>'">다음글</button>
+                        <?php } ?>
+                        <button type="button" class="btn btn-primary" onclick="location.href='./index.php?page=<?=$page?>'">목록</button>
                     </div>
                 </div>
 

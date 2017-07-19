@@ -3,14 +3,13 @@
     
 # ---------------------- 페이징 처리 --------------------------- #
     $paging_data = mysqli_query($conn, "SELECT * FROM board ORDER BY id DESC");
-    $max_post = mysqli_num_rows($paging_data);   # 게시판 내의 총 게시물 수
+    $total_post = mysqli_num_rows($paging_data);   # 게시판 내의 총 게시물 수
     
     $page = (!empty($_GET['page']))?$_GET['page']:1;  # GET으로 page값을 받도록 처리, 최초 page값이 없을 경우 1로 처리  
     $list_post = 15;    # 각 페이지당 표시될 게시물 수
     $block = 5; # 페이지 네비게이션의 범위 지정 (5페이지씩 1블록 단위로 아래 표시)
     
-    $max_page = ceil($max_post/$list_post); # 현재 총 페이지 수
-    $max_block = ceil($max_page/$block);
+    $max_page = ceil($total_post/$list_post); # 현재 총 페이지 수
     $now_block = ceil($page/$block);
     
     $start_page = ($now_block * $block) - ($block - 1);
@@ -24,7 +23,7 @@
     }
 # ---------------------- 데이터 처리 ------------------------- #
     $start_post = ($page-1) * $list_post;
-    $no = $max_post - $start_post;
+    $no = $total_post - $start_post;
     
     $listing_data = mysqli_query($conn, "SELECT * FROM board ORDER BY id DESC LIMIT $start_post, $list_post");
 ?>
@@ -77,17 +76,30 @@
                     <a class="btn btn-primary" href="./write.php">글쓰기</a>
                 </div>
                 <div class="con-xs-6 col-lg-6">
-                    <a class="btn btn-primary pull-right" href="./index.php">목록</a>
+                    <a class="btn btn-primary pull-right" href="./index.php?page=<?=$page?>">목록</a>
                 </div>
             </div>
-            <a href="./index.php?page=<?=$start_page-1?>">이전</a>    
+            <center>
+            
             <ul class="pagination">
-                <?php for ($p=$start_page; $p<=$end_page; $p++){ ?>
-                    <li><a href="./index.php?page=<?=$p?>"><?=$p?></a>
+                <?php if($page>1) { ?>
+                    <li><a href="./index.php?page=<?=$start_page?>"><<</a>
+                    <li><a href="./index.php?page=<?=$page-1?>"><</a>
+                <?php } ?>
+                <?php for ($p=$start_page; $p<=$end_page; $p++){
+                        if ($p==$page){ ?>
+                            <li class="active"><a href="./index.php?page=<?=$p?>"><?=$p?></a>
+                  <?php }
+                        else{ ?>
+                            <li><a href="./index.php?page=<?=$p?>"><?=$p?></a>
+                  <?php }
+                      } ?>
+                <?php if($page<$max_page){ ?>
+                        <li><a href="./index.php?page=<?=$page+1?>">></a>
+                        <li><a href="./index.php?page=<?=$end_page?>">>></a>
                 <?php } ?>
             </ul>
-            <a href="./index.php?page=<?=$end_page+1?>">다음</a>
-            
+            </center>
         </div>
 
         
