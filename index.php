@@ -43,9 +43,10 @@
     <body>
         <div class="container">
             <center><h2>문스냅의 지속가능한 개발 게시판</h2></center>
-
+            <a class="btn btn-primary pull-right" href="./login.php">로그인</a>
             <table class="table table-hover table-bordered">
                 <thead>
+                    <br>
                     <tr>
                         <th>글번호</th>
                         <th>제목</th>
@@ -57,13 +58,13 @@
                 <tbody>
                     <?php
                         while ($row = mysqli_fetch_array($listing_data)){
-                            print "<tr>";
-                            print "<td>$no</td>";
-                            print "<td><a href='./view.php?page=$page&id=$row[id]'>$row[title]</a></td>";
-                            print "<td>$row[author]</td>";
-                            print "<td>$row[hits]</td>";
-                            print "<td>$row[created]</td>";
-                            print "</tr>";
+                            echo "<tr>";
+                            echo "<td>$no</td>";
+                            echo "<td><a href='./view.php?page=$page&id=$row[id]'>$row[title]</a></td>";
+                            echo "<td>$row[author]</td>";
+                            echo "<td>$row[hits]</td>";
+                            echo "<td>$row[created]</td>";
+                            echo "</tr>";
                             $no = $no - 1;  
                         }                        
                         mysqli_close($conn);

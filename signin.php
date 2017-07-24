@@ -1,3 +1,6 @@
+<?php
+    include('connection_info.php');
+?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,11 +11,11 @@
 </head>
 <body>
     <div class="container">
-        <center><h2>사용자 로그인</h2></center>
+        <center><h2>사용자 등록</h2></center>
         <div class="row">
             <div class="col-xs-4 col-lg-4"></div>
-            <div class="col-xs-4 col-lg-4">
-                <form action="./process_login.php" method="post">
+            <div class="col-xs-4 col-lg-4" style="background-color:lavender;">
+                <form action="./process_signin.php" method="post">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="userid" type="text" class="form-control" name="userid" placeholder="아이디">
@@ -20,17 +23,13 @@
                         <br>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="passwd" type="password" class="form-control" name="passwd" placeholder="비밀번호">
+                        <input id="password" type="password" class="form-control" name="passwd" placeholder="비밀번호">
                     </div>
-                    
-                    <br>
-                    <a class="btn btn-warning" href="./signin.php">회원등록</a>
-                    <a class="btn btn-danger">ID / 비밀번호 찾기</a>
-                    <input type="submit" class="btn btn-success pull-right" value="로그인"></a>
+                    <br>  
+                    <a class="btn btn-danger" href="./index.php">메인으로</a>
+                    <input type="submit" class="btn btn-success pull-right" value="등록"></input>
+            
                 </form>
-                    <br>
-                    
-                    
             </div>
             <div class="col-xs-4 col-lg-4"></div>
         </div>
