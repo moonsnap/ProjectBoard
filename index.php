@@ -1,5 +1,6 @@
 <?php
     include("connection_info.php");
+    session_start();
     
 # ---------------------- 페이징 처리 --------------------------- #
     $paging_data = mysqli_query($conn, "SELECT * FROM board ORDER BY id DESC");
@@ -43,7 +44,17 @@
     <body>
         <div class="container">
             <center><h2>문스냅의 지속가능한 개발 게시판</h2></center>
-            <a class="btn btn-primary pull-right" href="./login.php">로그인</a>
+            <div class="row">
+                <?php
+                    if (isset($_SESSION['userid'])){
+                        echo '<div class="col-xs-7 col-sm-9 col-md-9 col-lg-10"></div>';
+                        echo '<div class="col-xs-5 col-sm-3 col-md-3 col-lg-2">';
+                        echo $_SESSION['userid']." 님"."<a class='btn btn-primary pull-right' href='./process_logout.php'>로그아웃</a></div><br>";
+                    }
+                    else{
+                        echo "<a class='btn btn-primary pull-right' href='./login.php'>로그인</a>";
+                    } ?>
+            
             <table class="table table-hover table-bordered">
                 <thead>
                     <br>
@@ -76,7 +87,7 @@
                 <div class="col-xs-6 col-lg-6">
                     <a class="btn btn-primary" href="./write.php">글쓰기</a>
                 </div>
-                <div class="con-xs-6 col-lg-6">
+                <div class="col-xs-6 col-lg-6">
                     <a class="btn btn-primary pull-right" href="./index.php?page=<?=$page?>">목록</a>
                 </div>
             </div>
