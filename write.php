@@ -1,6 +1,12 @@
 <?php
     include("connection_info.php");    
     $result = mysqli_query($conn, "SELECT * FROM board");
+    session_start();
+
+    if(!isset($_SESSION['userid'])){
+        echo "<script>alert('로그인이 필요한 기능입니다.');";
+        echo "location.href='login.php';</script>";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +36,11 @@
         <h2>새로운 글 작성</h2>
         <form action="./process_write.php" method="post" onsubmit="return confirm('등록하시겠습니까?');">
             <div class="input-group col-xs-5 col-lg-2">    
-                <span class="input-group-addon">작성자</span>
-                <input id="author" type="text" class="form-control" name="author" placeholder="작성자">
+                <input id="author" type="hidden" class="form-control" name="author" value="<?php echo $_SESSION['userid'] ?>">
+            </div>
+            <div class="input-group col-xs-5 col-lg-2">    
+                <span class="input-group-addon">비밀번호</span>
+                <input id="passwd" type="password" class="form-control" name="passwd" placeholder="비밀번호">
             </div>
             <div class="input-group">
                 <span class="input-group-addon">제 목</span>
