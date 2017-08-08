@@ -12,7 +12,17 @@
     $maxmin_no = mysqli_fetch_row($num_query);    
 ?>
 
-
+<script>
+    function cancel_check(){
+        var flag = confirm("글을 삭제하시겠습니까?");    
+           
+        if (flag==true)
+            location.href="/process_del.php?id=<?=$id?>";
+        
+        else
+            return;
+    }
+</script>
 
 <head>
     <meta charset="utf-8">
@@ -53,21 +63,12 @@
                 <div class="col-xs-4 col-md-4 col-lg-4">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary" onclick="location.href='./write.php'">글쓰기</button>
-                        <button type="button" class="btn btn-primary" onclick="location.href='./modify.php?page=<?=$page?>&id=<?=$id?>'">수정</button>
-                <?php if($_SESSION['userid']==$data['author']){?>
-                        <script>
-                            function cancel_check(){
-                                var flag = confirm("글을 삭제하시겠습니까?");    
-            
-                                if (flag==true)
-                                    location.href="./process_del.php?id=<?=$id?>";
-                                
-                                else
-                                    return;
-                            }
-                        </script>
-                        <button type="button" class="btn btn-primary" onclick="cancel_check()">삭제</button>
-                  <?php } ?>
+                <?php if(isset($_SESSION['userid'])){?>  
+                    <?php if($_SESSION['userid']==$data['author']){?>      
+                            <button type="button" class="btn btn-primary" onclick="location.href='./modify.php?page=<?=$page?>&id=<?=$id?>'">수정</button>
+                            <button type="button" class="btn btn-primary" onclick="cancel_check()">삭제</button>
+                    <?php } ?>    
+                <?php } ?>
                     </div>
                 </div>
                 <div class="col-xs-4 col-md-4 col-lg-4"></div>
