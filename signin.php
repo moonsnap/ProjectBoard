@@ -13,7 +13,7 @@
         var idflag=0, passflag=0;
         function id_ValidCheck(userid){
             if(userid==""){
-                alert("아이디를 입력해주세요");
+                alert("아이디를 입력해주세요");              
                 return false;
             }
             else{                
@@ -21,12 +21,12 @@
                 
                 if(validexp.test(userid)==true){
                     idflag=1;
-                    alert("사용가능한 아이디입니다.");
+                    alert("사용가능한 아이디입니다.");                   
                     return true;
                 }
                 else{
                     idflag=0;
-                    alert("아이디는 영문, 숫자를 혼합하여 5-30자리를 입력해야 합니다.");
+                    alert("아이디는 영문, 숫자 5-30자리를 입력해야 합니다.");
                     return false;
                 }
                 
@@ -61,10 +61,11 @@
         }
 
         function valid_flag(){
-            if(idflag == 1 && passflag == 1)
-                return true;
+            if(idflag == 1 && passflag == 1){
+                confirm("등록하시겠습니까?");
+            }
             else{
-                alert("아이디 또는 비밀번호가 조건에 맞지 않습니다.");
+                alert("아이디 또는 비밀번호가 조건에 맞지 않습니다.");                
                 return false;
             }                
         }
@@ -80,23 +81,24 @@
                 <form action="./process_signin.php" method="post" onsubmit="return valid_flag()">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="userid" type="text" class="form-control" name="userid" onfocusout="id_ValidCheck(document.getElementById('userid').value)" placeholder="아이디">
+                        <input id="userid" type="text" class="form-control" name="userid" onblur="id_ValidCheck(document.getElementById('userid').value)" placeholder="아이디">
                     </div>
-                    <br><br>
+                    <br>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="passwd" type="password" class="form-control" name="passwd" placeholder="비밀번호">
                     </div>
                      <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-ok"></i></span>
-                        <input id="passconfirm" type="password" class="form-control" name="passconfirm" placeholder="비밀번호 재입력" onfocusout="pass_ValidCheck(document.getElementById('passwd').value,document.getElementById('passconfirm').value)">
+                        <input id="passconfirm" type="password" class="form-control" name="passconfirm" placeholder="비밀번호 재입력" onblur="pass_ValidCheck(document.getElementById('passwd').value,document.getElementById('passconfirm').value)">
                     </div>
                     <br>  
                     <a class="btn btn-danger" href="./index.php">메인으로</a>
                     <input type="submit" class="btn btn-success pull-right" value="등록"></input>
             
                 </form>
-            </div>            
+            </div>
+            
         </div>
     </div>
 </body>
