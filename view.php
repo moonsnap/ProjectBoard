@@ -9,30 +9,11 @@
     $result = mysqli_query($conn, "SELECT * FROM board WHERE id=$id");  
     $data = mysqli_fetch_array($result);
     $num_query = mysqli_query($conn, "SELECT MAX(id), MIN(id) FROM board");
-    $maxmin_no = mysqli_fetch_row($num_query);    
+    $maxmin_no = mysqli_fetch_row($num_query);
+    
+    include("header.php");
 ?>
 
-<script>
-    function cancel_check(){
-        var flag = confirm("글을 삭제하시겠습니까?");    
-           
-        if (flag==true)
-            location.href="/process_del.php?id=<?=$id?>";
-        
-        else
-            return;
-    }
-</script>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-</head>
-<body>
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-lg-12"><h2><?=$data['title']?></h2></div>
@@ -62,10 +43,10 @@
             <p><div class="row">
                 <div class="col-xs-4 col-md-4 col-lg-4">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-primary" onclick="location.href='./write.php'">글쓰기</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='/write.php'">글쓰기</button>
                 <?php if(isset($_SESSION['userid'])){?>  
                     <?php if($_SESSION['userid']==$data['author']){?>      
-                            <button type="button" class="btn btn-primary" onclick="location.href='./modify.php?page=<?=$page?>&id=<?=$id?>'">수정</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='/modify.php?page=<?=$page?>&id=<?=$id?>'">수정</button>
                             <button type="button" class="btn btn-primary" onclick="cancel_check()">삭제</button>
                     <?php } ?>    
                 <?php } ?>
@@ -75,18 +56,28 @@
                 <div class="col-xs-4 col-md-4 col-lg-4">
                     <div class="btn-group pull-right">
                         <?php if($id>$maxmin_no[1]){ ?>
-                            <button type="button" class="btn btn-primary" onclick="location.href='./view.php?page=<?=$page?>&id=<?=$id-1?>'">이전글</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='/view.php?page=<?=$page?>&id=<?=$id-1?>'">이전글</button>
                         <?php } ?>
                         <?php if($id<$maxmin_no[0]){ ?>
-                            <button type="button" class="btn btn-primary" onclick="location.href='./view.php?page=<?=$page?>&id=<?=$id+1?>'">다음글</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='/view.php?page=<?=$page?>&id=<?=$id+1?>'">다음글</button>
                         <?php } ?>
-                        <button type="button" class="btn btn-primary" onclick="location.href='./index.php?page=<?=$page?>'">목록</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='/index.php?page=<?=$page?>'">목록</button>
                     </div>
                 </div>
 
             </div></p>
         </div>
     </div>
-
+    <script>
+    function cancel_check(){
+        var flag = confirm("글을 삭제하시겠습니까?");    
+           
+        if (flag==true)
+            location.href="/process_del.php?id=<?=$id?>";
+        
+        else
+            return;
+    }
+    </script>                        
 </body>
 </html>

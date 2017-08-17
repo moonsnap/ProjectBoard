@@ -7,12 +7,12 @@
         
     if(!isset($_SESSION['userid'])){
         echo "<script>alert('로그인이 필요한 기능입니다.');";
-        echo "location.href='./login.php';</script>";
+        echo "location.href='/login.php';</script>";
     }
     
     else{
         $del_sql = "DELETE FROM board WHERE id=$id";
         mysqli_query($conn, $del_sql);
-        header('Location:./index.php');
+        header('Location:/index.php');
     }
 ?>  

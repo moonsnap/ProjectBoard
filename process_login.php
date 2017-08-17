@@ -10,7 +10,7 @@
     else{
         session_start();
         $_SESSION['userid'] = $_POST['userid'];
-        header('Location:./index.php');
+        header('Location:/index.php');
     }
 ?>
 
