@@ -13,13 +13,13 @@
 
     $b_check = valid_id($userid);
     if($b_check == false) {
-        alert_back('ID는 5-20자의 영문, 숫자 조합이어야 합니다.');
+        alert_back('ID는 5-20자의 영문, 숫자 이어야 합니다.');
         exit;
     }
 
     $b_check = valid_pass($passwd);
     if($b_check == false) {
-        alert_back('비밀번호는 5-20자의 영문, 숫자 조합이어야 합니다.');
+        alert_back('비밀번호는 5-20자의 영문, 숫자 이어야 합니다.');
         exit;
     }
     
@@ -40,5 +40,5 @@
     $save_query = "INSERT INTO member (userid, passwd) 
     VALUES ('{$userid}', SHA1('{$passwd}'))";
     mysqli_query($conn, $save_query);
-    alert_redirect('가입이 완료되었습니다.', '/login.php');
+    alert_redirect('가입이 완료되었습니다.', './login.php');
 ?>

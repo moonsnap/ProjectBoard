@@ -14,10 +14,10 @@
     }
 
     function valid_id($str_id){
-        return preg_match('/^[a-zA-Z]+[A-Za-z0-9]{5,20}$/',$str_id);
+        return preg_match('/^[a-zA-Z]+[A-Za-z0-9]{4,20}$/',$str_id);
     }
 
     function valid_pass($str_pass){
-        return preg_match('/^[a-zA-Z0-9!@#$%^&*_]{6,20}$/',$str_pass);
+        return preg_match('/^[a-zA-Z0-9!@#$%^&*_]{5,20}$/',$str_pass);
     }
 ?> 

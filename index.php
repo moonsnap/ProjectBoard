@@ -39,10 +39,10 @@ include("header.php"); ?>
                     if (isset($_SESSION['userid'])){
                         echo '<div class="col-xs-7 col-sm-9 col-md-9 col-lg-10"></div>';
                         echo '<div class="col-xs-5 col-sm-3 col-md-3 col-lg-2">';
-                        echo $_SESSION['userid']." 님"."<a class='btn btn-primary pull-right' href='/process_logout.php'>로그아웃</a></div><br>";
+                        echo $_SESSION['userid']." 님"."<a class='btn btn-primary pull-right' href='./process_logout.php'>로그아웃</a></div><br>";
                     }
                     else{
-                        echo "<a class='btn btn-primary pull-right' href='/login.php'>로그인</a>";
+                        echo "<a class='btn btn-primary pull-right' href='./login.php'>로그인</a>";
                     } ?>
             
             <table class="table table-hover table-bordered">
@@ -61,7 +61,7 @@ include("header.php"); ?>
                         while ($row = mysqli_fetch_array($listing_data)){
                             echo "<tr>";
                             echo "<td>$no</td>";
-                            echo "<td><a href='/view.php?page=$page&id=$row[id]'>$row[title]</a></td>";
+                            echo "<td><a href='./view.php?page=$page&id=$row[id]'>$row[title]</a></td>";
                             echo "<td>$row[author]</td>";
                             echo "<td>$row[hits]</td>";
                             echo "<td>$row[created]</td>";
@@ -75,30 +75,30 @@ include("header.php"); ?>
                         
             <div class="row">
                 <div class="col-xs-6 col-lg-6">
-                    <a class="btn btn-primary" href="/write.php">글쓰기</a>
+                    <a class="btn btn-primary" href="./write.php">글쓰기</a>
                 </div>
                 <div class="col-xs-6 col-lg-6">
-                    <a class="btn btn-primary pull-right" href="/index.php?page=<?=$page?>">목록</a>
+                    <a class="btn btn-primary pull-right" href="./index.php?page=<?=$page?>">목록</a>
                 </div>
             </div>
             <center>
             
             <ul class="pagination">
                 <?php if($page>1) { ?>
-                    <li><a href="/index.php?page=<?=$start_page?>"><<</a>
-                    <li><a href="/index.php?page=<?=$page-1?>"><</a>
+                    <li><a href="./index.php?page=<?=$start_page?>"><<</a>
+                    <li><a href="./index.php?page=<?=$page-1?>"><</a>
                 <?php } ?>
                 <?php for ($p=$start_page; $p<=$end_page; $p++){
                         if ($p==$page){ ?>
-                            <li class="active"><a href="/index.php?page=<?=$p?>"><?=$p?></a>
+                            <li class="active"><a href="./index.php?page=<?=$p?>"><?=$p?></a>
                   <?php }
                         else{ ?>
-                            <li><a href="/index.php?page=<?=$p?>"><?=$p?></a>
+                            <li><a href="./index.php?page=<?=$p?>"><?=$p?></a>
                   <?php }
                       } ?>
                 <?php if($page<$max_page){ ?>
-                        <li><a href="/index.php?page=<?=$page+1?>">></a>
-                        <li><a href="/index.php?page=<?=$end_page?>">>></a>
+                        <li><a href="./index.php?page=<?=$page+1?>">></a>
+                        <li><a href="./index.php?page=<?=$end_page?>">>></a>
                 <?php } ?>
             </ul>
             </center>
