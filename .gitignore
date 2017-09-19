@@ -11,4 +11,4 @@ favicon.ico
 opentutorials/
 img/
 
-application/config/database.php
+CI/application/config/database.php
