@@ -1,21 +1,35 @@
-<table class="table table-bordered span12">
-    <caption><h2>게시판</h2></caption>
-    <thead>
-        <tr>
-            <th>글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>조회수</th>
-            <th>날짜</th>
-        </tr>
-        
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>글제목 들어갈 곳</td>
-            <td>문스냅</td>
-            <td>1</td>
-            <td>2017. 09. 13 17:40</td>
-        </tr>
-    </tbody>
-</table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <table class="table table-bordered">
+                    <center><h2>게시판</h2></center>
+                    <thead>
+                        <tr>
+                            <th>글번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>조회수</th>
+                            <th>날짜</th>
+                        </tr>
+                        
+                    <tbody>
+                  <?php foreach($posts as $entry){ ?>
+                            <tr>    
+                                <td><?=$entry->id?></td>
+                                <td><a href="/index.php/board/post/<?=$entry->id?>"><?=$entry->title?></td>
+                                <td><?=$entry->author?></td>
+                                <td><?=$entry->hits?></td>
+                                <td><?=$entry->created?></td>
+                            </tr>
+                  <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8"><a class="btn btn-primary" href="/index.php/board/write">글쓰기</a></div>
+            <div class="col-md-2"></div>
+        </div>

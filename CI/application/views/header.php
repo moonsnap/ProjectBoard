@@ -2,32 +2,33 @@
 <html>
 <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link href="/static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <style>
-            body {padding-top:60px;}
-        </style>
-        <link href="/static/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="/static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <ul class="nav pull-right">
-                    <!-- 세션이 존재하지 않을 때 -->
-                    <li><a href="/index.php/auth/login">로그인</a></li>
-                    <li><a href="/index.php/auth/register">회원가입</a></li>
-                    <!-- 세션이 존재할 때 -->
-                    <li><a href="/index.php/auth/logout">로그아웃</a></li>
+                    <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="/index.php/board">문스냅 개발페이지</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Page 1</a></li>
+                    <li><a href="#">Page 2</a></li> 
+                    <li><a href="#">Page 3</a></li> 
                 </ul>
-                <a class="brand" href="/index.php/post">문스냅 개발페이지</a>               
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/index.php/auth/register"><span class="glyphicon glyphicon-user"></span>회원가입</a></li>
+                    <li><a href="/index.php/auth/login"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+                    <li><a href="/index.php/auth/logout"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a></li>
+                </ul>
             </div>
         </div>
-    </div>
+    </nav>       
