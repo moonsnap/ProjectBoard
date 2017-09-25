@@ -1,12 +1,13 @@
+<?php $this->load->helper('form'); ?>
+<div class="row">   
+    <div class="col-md-5"></div> 
+    <div class="col-md-4"> <?php echo validation_errors(); ?> </div>
+</div>
 <form class="form-horizontal" action="/index.php/auth/register" method="POST">
-    <div class="row">   
-        <div class="col-md-5"></div> 
-        <div class="col-md-4"> <?php echo validation_errors(); ?> </div>
-    </div>
     <div class="form-group">
         <label class="control-label col-md-5">Email</label>
         <div class="col-md-2">
-            <input type="email" class="form-control" id="email" name="email" value="<?php echo set_value('email'); ?>" placeholder="Email">
+            <input type="text" class="form-control" id="email" name="email" value="<?php echo set_value('email'); ?>" placeholder="Email">
         </div>
     </div>
 
@@ -31,7 +32,7 @@
         </div>
     </div>
     
-    <div class="form-group"> 
+    <div class="form-group">
         <div class="col-md-5"></div>
         <div class="col-md-2">
             <button type="submit" class="btn btn-primary pull-right">등록</button>
