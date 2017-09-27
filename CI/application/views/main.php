@@ -30,6 +30,15 @@
         </div>
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-8"><a class="btn btn-primary" href="/index.php/board/write">글쓰기</a></div>
+            <div class="col-md-8 btnbar">
+                <div class="col-md-2">
+                    <a class="btn btn-primary" href="/index.php/board/write">글쓰기</a>
+                </div>
+                <div class="col-md-8"></div>
+                <div class="col-md-2">
+                    <a class="btn btn-primary pull-right" href="/index.php/board">목록</a>
+                </div>
+            </div>
+            
             <div class="col-md-2"></div>
         </div>

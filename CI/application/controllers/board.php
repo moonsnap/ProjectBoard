@@ -36,7 +36,9 @@ class Board Extends CI_Controller{
         }
         else
         {
-            $post_id = $this->board_model->add($this->input->post('title'), $this->input->post('content'));
+            $post_id = $this->board_model->add(array('title'=>$this->input->post('title'), 
+                                                     'content'=>$this->input->post('content'), 
+                                                     'nickname'=>$this->session->userdata('nickname')));
             $this->load->helper('url');
             redirect('/board/post/'.$post_id);
         }

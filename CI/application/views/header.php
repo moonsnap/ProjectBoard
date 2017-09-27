@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="/static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        div.btnbar{
+            padding:1px;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse">

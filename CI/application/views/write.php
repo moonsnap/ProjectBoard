@@ -1,20 +1,22 @@
 <div class="col-md-2"></div>
-    <form action="/index.php/board/write" method="POST" class="col-md-8">
-<?php echo validation_errors(); ?>
 
-        <input type="text" name="title" placeholder="제목" class="col-md-12"></input>
-        <textarea name="content" placeholder="내용"></textarea>
-
-        <div class="form_control">
+<?php if($this->session->userdata('is_login')){ ?> 
+        <form action="/index.php/board/write" method="POST" class="col-md-8">
+        <?php echo validation_errors(); ?>
+            <input type="text" name="title" placeholder="제목" class="col-md-12"></input>
+            <textarea name="content" placeholder="내용" class="col-md-12"></textarea>
             <br>
-            <input class="btn btn-success btn-large" type="submit" value="등록"></input>
-            <input class="btn btn-danger btn-large" type="button" value="취소"></input>
-        </div>
-    </form>
-<div class="col-md-2"></div>
+            <div class="pull-right">
+                <input class="btn btn-success btn-lg" type="submit" value="등록"></input>
+                <a href="/index.php/board"><input class="btn btn-danger btn-lg" type="button" value="취소"></input></a>
+            </div>
+        </form>
+<?php }
+      else{ ?>
+        <script> 
+            alert("로그인이 필요한 기능입니다.");
+            location.href='/index.php/board';
+        </script>
 
-<script src="/static/lib/ckeditor/ckeditor.js"></script>
-<script>
-CKEDITOR.replace('content', {
-    'filebrowserUploadUrl':'/index.php/topic/upload_receive_from_ck'});
-</script>
+<?php } ?>
+<div class="col-md-2"></div>

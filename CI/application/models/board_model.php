@@ -12,16 +12,19 @@ class Board_model extends CI_Model{
         $this->db->select('id');
         $this->db->select('title');
         $this->db->select('content');
+        $this->db->select('author');
+        $this->db->select('hits');
         $this->db->select('UNIX_TIMESTAMP(created) AS created');
         return $this->db->get_where('board', array('id'=>$post_id))->row();
     }
 
-    function add($title, $content){
+    function add($option){
         $this->db->set('created', 'NOW()', false);
         $this->db->insert('board',array(
-            'title'=>$title,
-            'content'=>$content
-        ));
+            'title'=>$option['title'],
+            'content'=>$option['content'],
+            'author'=>$option['nickname'])
+        );
         return $this->db->insert_id();
     }
 }
