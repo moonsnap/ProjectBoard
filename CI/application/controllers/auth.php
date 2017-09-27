@@ -7,6 +7,18 @@ class Auth extends CI_Controller{
         $this->load->database();
     }
 
+    function login(){
+        $this->load->view('header');
+        $this->load->view('login');
+        $this->load->view('footer');
+    }
+
+    function logout(){
+        $this->session->sess_destroy();
+        $this->load->helper('url');
+        redirect('/board');
+    }
+
     function register(){
         $this->load->view('header');
         
@@ -28,9 +40,34 @@ class Auth extends CI_Controller{
             $this->user_model->add(array('email'=>$this->input->post('email'),
                                          'password'=>$hash,
                                          'nickname'=>$this->input->post('nickname')));
+        
+            $this->session->set_flashdata('message', '회원가입에 성공했습니다.');
+            $this->load->helper('url');
+            redirect('/');
         }
         $this->load->view('footer');
-    }    
+    }
+    
+    function authentication(){
+        $this->load->model('user_model');
+
+        $user = $this->user_model->getByEmail(array('email'=>$this->input->post('userid')));
+        
+        if($this->input->post('userid') == $user->email &&
+            password_verify($this->input->post('password'), $user->password)){
+                $this->session->set_userdata('is_login', true);
+                $this->session->set_userdata('nickname', $user->nickname);
+                $this->load->helper('url');
+                redirect('/board');
+        }
+        else{
+            echo "불일치";
+            $this->session->set_flashdata('message', '로그인에 실패했습니다.');
+            $this->load->helper('url');
+            redirect('/auth/login');
+        }
+
+    }
 }
 
 ?>
