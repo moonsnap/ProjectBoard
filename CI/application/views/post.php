@@ -24,8 +24,10 @@
         <div class="col-md-8 btnbar">
             <div class="col-md-3">
                 <a class="btn btn-primary" href="/index.php/board/write">글쓰기</a>
-                <a class="btn btn-primary" href="/index.php/board/modify">수정</a>
-                <a class="btn btn-primary" href="/index.php/board/delete">삭제</a>
+          <?php if($post->author == $this->session->userdata('nickname')) { ?>       
+                    <a class="btn btn-primary" href="/index.php/board/modify/<?=$post->id?>">수정</a>
+                    <a class="btn btn-primary" href="/index.php/board/delete/<?=$post->id?>" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+          <?php } ?>
             </div>
             <div class="col-md-6"></div> 
             <div class="btn-group col-md-3">

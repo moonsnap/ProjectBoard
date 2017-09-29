@@ -3,7 +3,7 @@
     <div class="col-md-5"></div> 
     <div class="col-md-4"> <?php echo validation_errors(); ?> </div>
 </div>
-<form class="form-horizontal" action="/index.php/auth/register" method="POST">
+<form class="form-horizontal" action="/index.php/auth/register" method="POST" onsubmit="return confirm('가입하시겠습니까?');">
     <div class="form-group">
         <label class="control-label col-md-5">Email</label>
         <div class="col-md-2">

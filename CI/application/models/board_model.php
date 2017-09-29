@@ -5,27 +5,38 @@ class Board_model extends CI_Model{
     }
  
     function gets(){
-        return $this->db->query("SELECT * FROM board ORDER BY id DESC")->result();
+        $this->db->order_by('id', 'desc');
+        return $this->db->get('board')->result();        
     }
- 
-    function get($post_id){
-        $this->db->select('id');
-        $this->db->select('title');
-        $this->db->select('content');
-        $this->db->select('author');
-        $this->db->select('hits');
-        $this->db->select('UNIX_TIMESTAMP(created) AS created');
-        return $this->db->get_where('board', array('id'=>$post_id))->row();
+
+    function get($id){        
+        return $this->db->get_where('board', array('id'=>$id))->row();
+    }
+
+    function hit($id){
+        $this->db->set('hits', 'hits+1',FALSE);
+        $this->db->where('id',$id);
+        $this->db->update('board');
     }
 
     function add($option){
         $this->db->set('created', 'NOW()', false);
         $this->db->insert('board',array(
-            'title'=>$option['title'],
+            'title'=>strip_tags($option['title']),
             'content'=>$option['content'],
-            'author'=>$option['nickname'])
+            'author'=>strip_tags($option['nickname']))
         );
         return $this->db->insert_id();
+    }
+
+    function modify($option){
+        $this->db->update('board', array('title'=>strip_tags($option['title']),
+                                         'content'=>$option['content']));
+        return $this->db->get_where('board', array('id'=>$option['id']))->row();
+    }
+
+    function delete($id){
+        return $this->db->delete('board', array('id'=>$id));
     }
 }
 ?>
