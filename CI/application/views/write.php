@@ -15,7 +15,7 @@
       else{ ?>
         <script> 
             alert("로그인이 필요한 기능입니다.");
-            location.href='/index.php/board';
+            location.href='/index.php/auth/login';
         </script>
 
 <?php } ?>

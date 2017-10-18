@@ -8,31 +8,58 @@ class Board Extends CI_Controller{
         $this->load->database();
         $this->load->model('board_model');        
     }
-    
+
     function index(){
-        // $this->load->library('pagination');
-
-        // $config['base_url'] = '/board/page';
-        // $config['total_rows'] = 200;
-        // $config['per_page'] = 20;
-        // $config['uri_segment'] = 4;
-        
-        // $this->pagination -> initialize($config);
-
-        // $data['']
-        
         $this->load->view('header');
-        $posts = $this->board_model->gets();
-        $this->load->view('main', array('posts'=>$posts));
+        $this->load->view('first');
         $this->load->view('footer');
     }
+    
+    function page(){
+        $this->load->library('pagination');
+        
+        $config['base_url'] = base_url().'index.php/board/page';
+        $config['total_rows'] = $this->board_model->total_entry();
+        $config['per_page'] = 10;
+        $choice = $config['total_rows'] / $config['per_page'];
+        $config['use_page_numbers'] = TRUE;        
+        
 
-    // function lists(){
-    //     $this->load->library('pagination');
+        $config['full_tag_open'] = '<nav aria-label="Page navigation"><ul class="pagination">';
+        $config['full_tag_close'] = '</ul></nav>';
 
-    //     $config['base_url'] = '/board/page';
-    //     $config['total_rows'] = $this->board_model->get_list($this->uri->segment(3), 'count');
-    // }
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        
+        $config['first_link'] = 'First';
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        
+        $config['last_link'] = 'Last';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        
+        $config['prev_link'] = '<span aria-hidden="true">&laquo;</span>';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        
+        $config['next_link'] = '<span aria-hidden="true">&raquo;</span>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 1;
+        
+        $data['paging'] = $this->pagination->create_links();
+        $data["results"] = $this->board_model->page_entry($config['per_page'], ($page-1)*$config['per_page']);
+
+        $this->load->view('header');
+        $this->load->view('main',$data);
+        $this->load->view('footer');
+    }
 
     function post($id){
         $this->board_model->hit($id);
@@ -66,7 +93,7 @@ class Board Extends CI_Controller{
 
     function delete($id){
         $this->board_model->delete($id); 
-        redirect('/board');                    
+        redirect('/board/page');                    
     }
 
     function modify($id){

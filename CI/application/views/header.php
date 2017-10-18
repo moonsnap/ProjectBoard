@@ -21,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span> 
                 </button>
-                <a class="navbar-brand" href="/index.php/board">문스냅 개발페이지</a>
+                <a class="navbar-brand" href="/index.php/board/page">문스냅 개발페이지</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav"></ul>

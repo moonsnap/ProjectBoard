@@ -58,7 +58,7 @@ class Auth extends CI_Controller{
                 $this->session->set_userdata('is_login', true);
                 $this->session->set_userdata('nickname', $user->nickname);
                 $this->load->helper('url');
-                redirect('/board');
+                redirect('/board/page');
         }
         else{
             echo "불일치";

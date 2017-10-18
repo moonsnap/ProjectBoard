@@ -4,13 +4,26 @@ class Board_model extends CI_Model{
         parent::__construct();
     }
  
-    function gets(){
+    function page_entry($limit, $start){
         $this->db->order_by('id', 'desc');
-        return $this->db->get('board')->result();        
+        $this->db->limit($limit, $start);
+        $query = $this->db->get('board');
+
+        if($query->num_rows()>0){
+            foreach($query->result() as $row){
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;    
     }
 
     function get($id){        
         return $this->db->get_where('board', array('id'=>$id))->row();
+    }
+
+    function total_entry(){
+        return $this->db->get('board')->num_rows();
     }
 
     function hit($id){
