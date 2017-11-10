@@ -30,24 +30,25 @@
 
     $str_title = "";
 
-include("header.php"); ?>
+    include("header.php"); ?>
         
         <div class="container">
             <center><h2>문스냅의 지속가능한 개발 게시판</h2></center>
-            <div class="row">
-                <?php
-                    if (isset($_SESSION['userid'])){
-                        echo '<div class="col-xs-7 col-sm-9 col-md-9 col-lg-10"></div>';
-                        echo '<div class="col-xs-5 col-sm-3 col-md-3 col-lg-2">';
-                        echo $_SESSION['userid']." 님"."<a class='btn btn-primary pull-right' href='./process_logout.php'>로그아웃</a></div><br>";
-                    }
-                    else{
-                        echo "<a class='btn btn-primary pull-right' href='./login.php'>로그인</a>";
-                    } ?>
             
             <table class="table table-hover table-bordered">
+                <div class="row">
+                    <div class="col-xs-6 col-lg-10"></div>
+                    <div class="col-xs-6 col-lg-2">
+                    <?php
+                        if (isset($_SESSION['userid'])){
+                            echo $_SESSION['userid']." 님"."<a class='btn btn-primary pull-right' href='./process_logout.php'>로그아웃</a></div>";
+                        }
+                        else{
+                            echo "<a class='btn btn-primary pull-right' href='./login.php'>로그인</a></div>";
+                        } ?>             
+                </div>
+                <br>                
                 <thead>
-                    <br>
                     <tr>
                         <th>글번호</th>
                         <th>제목</th>
@@ -76,13 +77,13 @@ include("header.php"); ?>
             <div class="row">
                 <div class="col-xs-6 col-lg-6">
                     <a class="btn btn-primary" href="./write.php">글쓰기</a>
-                </div>
+                </div>              
                 <div class="col-xs-6 col-lg-6">
                     <a class="btn btn-primary pull-right" href="./index.php?page=<?=$page?>">목록</a>
                 </div>
             </div>
-            <center>
             
+            <center>           
             <ul class="pagination">
                 <?php if($page>1) { ?>
                     <li><a href="./index.php?page=<?=$start_page?>"><<</a>

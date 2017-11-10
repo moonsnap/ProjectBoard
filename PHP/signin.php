@@ -32,20 +32,6 @@
         </div>    
     </div>
 </div>
-    <script> 
-        function valid_flag(){            
-            /*
-            if($('#userid').val().trim().length == 0 || 
-            $('#passwd').val().trim().length == 0 || 
-            $('#passconfirm').val().trim().length == 0){
-                alert("정보 입력이 올바르지 않습니다.");
-                return false;
-                exit();    
-            } */
-
-            if($())
-            confirm("등록하시겠습니까?");              
-        }
-    </script>
+    
 </body>
 </html>

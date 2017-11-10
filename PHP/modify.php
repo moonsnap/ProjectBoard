@@ -1,5 +1,6 @@
 <?php 
     include("connection_info.php");
+    include("function.php");
     $page = $_GET['page'];
     $id = $_GET['id']; 
     $modi_sql = mysqli_query($conn, "SELECT * FROM board WHERE id=$id");
@@ -7,16 +8,15 @@
     session_start();
 
     if(!isset($_SESSION['userid'])){
-            echo "<script>alert('로그인이 필요한 기능입니다.');";
-            echo "location.href='/login.php';</script>";
+        alert_redirect('로그인이 필요한 기능입니다.', './login.php');
     }
 
-    $str_title="글수정"
+    $str_title="글수정";
     include("header.php");
 ?>    
     <div class="container">
         <h2>글 수정하기</h2>
-        <form action="/process_modify.php?page=<?=$page?>&id=<?=$id?>" method="post" onsubmit="return confirm('등록하시겠습니까?');">
+        <form action="./process_modify.php?page=<?=$page?>&id=<?=$id?>" method="post" onsubmit="return confirm('등록하시겠습니까?');">
             <div class="input-group form-group col-xs-5 col-lg-2">    
                 <span class="input-group-addon">작성자</span>
                 <input id="disabledInput" type="text" class="form-control" name="author" placeholder="<?=$data['author']?>" disabled>
@@ -45,7 +45,7 @@
             var flag = confirm("글수정를 취소하시겠습니까?");    
             
             if (flag==true){
-                location.href="/view.php?page=<?=$page?>&id=<?=$id?>";
+                location.href="./view.php?page=<?=$page?>&id=<?=$id?>";
             }
             else
                 return;
