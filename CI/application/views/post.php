@@ -32,11 +32,11 @@
             <div class="col-md-6"></div> 
             <div class="btn-group col-md-3">
                 <div class="pull-right">
-            <?php if($post->id>1){ ?>
-                    <a class="btn btn-primary" href="/index.php/board/post/<?=$post->id-1?>">이전글</a>
+            <?php if(isset($prev_id->id)){ ?>
+                    <a class="btn btn-primary" href="/index.php/board/post/<?=$prev_id->id?>">이전글</a>
             <?php }
-                  if(!empty($post->id+1)){ ?>        
-                    <a class="btn btn-primary" href="/index.php/board/post/<?=$post->id+1?>">다음글</a>
+                  if(isset($next_id->id)){ ?>        
+                    <a class="btn btn-primary" href="/index.php/board/post/<?=$next_id->id?>">다음글</a>
             <?php } ?>
                     <a class="btn btn-primary" href="/index.php/board">목록</a>
                 </div>

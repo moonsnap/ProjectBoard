@@ -19,7 +19,8 @@
     <div class="form-group">
         <div class="col-md-5"></div>
         <div class="col-md-2">
-            <button type="submit" class="btn btn-primary pull-right">로그인</button>
-        </div>
+        <a class="btn btn-danger" href="/index.php/board/">메인</a>
+            <button type="submit" class="btn btn-primary pull-right">로그인</button>            
+        </div>       
     </div>    
 </form>

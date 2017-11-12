@@ -35,7 +35,8 @@
     <div class="form-group">
         <div class="col-md-5"></div>
         <div class="col-md-2">
-            <button type="submit" class="btn btn-primary pull-right">등록</button>
+            <a class="btn btn-danger" href="/index.php/board/">메인</a>
+            <input type="submit" class="btn btn-primary pull-right" value="등록"></button>            
         </div>
     </div>    
 </form>

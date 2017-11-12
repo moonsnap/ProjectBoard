@@ -11,14 +11,14 @@ class Board Extends CI_Controller{
 
     function index(){
         $this->load->view('header');
-        $this->load->view('first');
+        $this->load->view('main');
         $this->load->view('footer');
     }
     
     function page(){
         $this->load->library('pagination');
         
-        $config['base_url'] = base_url().'index.php/board/page';
+        $config['base_url'] = base_url().'/board/page';
         $config['total_rows'] = $this->board_model->total_entry();
         $config['per_page'] = 10;
         $choice = $config['total_rows'] / $config['per_page'];
@@ -54,18 +54,22 @@ class Board Extends CI_Controller{
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 1;
         
         $data['paging'] = $this->pagination->create_links();
-        $data["results"] = $this->board_model->page_entry($config['per_page'], ($page-1)*$config['per_page']);
+        $data['results'] = $this->board_model->page_entry($config['per_page'], ($page-1)*$config['per_page']);
 
         $this->load->view('header');
-        $this->load->view('main',$data);
+        $this->load->view('main', $data);
         $this->load->view('footer');
     }
 
     function post($id){
         $this->board_model->hit($id);
         $post = $this->board_model->get($id);
+
+        $prev_id = $this->board_model->prev_id($id);
+        $next_id = $this->board_model->next_id($id);
+
         $this->load->view('header');
-        $this->load->view('post', array('post'=>$post));
+        $this->load->view('post', array('post'=>$post, 'prev_id'=>$prev_id, 'next_id'=>$next_id));
         $this->load->view('footer');
     }
 

@@ -21,7 +21,6 @@ class Auth extends CI_Controller{
 
     function register(){
         $this->load->view('header');
-        
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('email', '이메일 주소', 'required|valid_email|is_unique[user.email]');
@@ -40,9 +39,6 @@ class Auth extends CI_Controller{
             $this->user_model->add(array('email'=>$this->input->post('email'),
                                          'password'=>$hash,
                                          'nickname'=>$this->input->post('nickname')));
-        
-            $this->session->set_flashdata('message', '회원가입에 성공했습니다.');
-            $this->load->helper('url');
             redirect('/board');
         }
         $this->load->view('footer');
@@ -51,22 +47,34 @@ class Auth extends CI_Controller{
     function authentication(){
         $this->load->model('user_model');
 
-        $user = $this->user_model->getByEmail(array('email'=>$this->input->post('userid')));
+        $this->load->view('header');
+        $this->load->library('form_validation');
         
-        if($this->input->post('userid') == $user->email &&
-            password_verify($this->input->post('password'), $user->password)){
-                $this->session->set_userdata('is_login', true);
-                $this->session->set_userdata('nickname', $user->nickname);
-                $this->load->helper('url');
-                redirect('/board/page');
-        }
-        else{
-            echo "불일치";
-            $this->session->set_flashdata('message', '로그인에 실패했습니다.');
-            $this->load->helper('url');
-            redirect('/auth/login');
+        $this->form_validation->set_rules('userid', '이메일 주소', 'required|valid_email');
+        $this->form_validation->set_rules('password', '비밀번호', 'required');
+
+        if($this->form_validation->run() == false){           
+            $this->load->view('login');
         }
 
+        else{
+            $user = $this->user_model->getByEmail(array('email'=>$this->input->post('userid')));
+            
+            if($this->input->post('userid') == $user->email &&
+                password_verify($this->input->post('password'), $user->password)){
+                    $this->session->set_userdata('is_login', true);
+                    $this->session->set_userdata('nickname', $user->nickname);
+                    $this->load->helper('url');
+                    redirect('/board/page');
+            }
+            else{
+                echo "<script>
+                    alert('로그인이 필요한 기능입니다.');
+                    location.href='/index.php/auth/login';
+                    </script>";
+            }
+        }
+        $this->load->view('footer');
     }
 }
 

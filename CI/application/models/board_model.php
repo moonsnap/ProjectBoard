@@ -51,5 +51,21 @@ class Board_model extends CI_Model{
     function delete($id){
         return $this->db->delete('board', array('id'=>$id));
     }
+
+    function prev_id($id){
+        $this->db->select('id');
+        $this->db->where('id <', $id);
+        $this->db->order_by('id', 'desc');
+        $this->db->limit(1);
+        return $this->db->get('board')->row();        
+    }
+
+    function next_id($id){
+        $this->db->select('id');
+        $this->db->where('id >', $id);       
+        $this->db->limit(1);
+        return $this->db->get('board')->row();        
+    }
 }
 ?>
+

@@ -1,9 +1,9 @@
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2"></div>
+            <div class="col-md-2"><?php echo CI_VERSION; ?></div>
             <div class="col-md-8">
                 <table class="table table-bordered">
-                    <center><h2>게시판</h2></center>
+                    <center><h2>문스냅 지속개발가능한 게시판</h2></center>
                     <thead>
                         <tr>
                             <th>글번호</th>
@@ -14,13 +14,13 @@
                         </tr>
                         
                     <tbody>
-                  <?php foreach($results as $data){ ?>
+                  <?php foreach($results as $entry){ ?>
                             <tr>    
-                                <td><?=$data->id?></td>
-                                <td><a href="/index.php/board/post/<?=$data->id?>"><?=$data->title?></td>
-                                <td><?=$data->author?></td>
-                                <td><?=$data->hits?></td>
-                                <td><?=$data->created?></td>
+                                <td><?=$entry->id?></td>
+                                <td><a href="/index.php/board/post/<?=$entry->id?>"><?=$entry->title?></td>
+                                <td><?=$entry->author?></td>
+                                <td><?=$entry->hits?></td>
+                                <td><?=$entry->created?></td>
                             </tr>
                   <?php } ?>
                     </tbody>
